@@ -1,27 +1,33 @@
 import pytest
 from io import StringIO
-from unittest.mock import patch
 
-def run_solution(input_data):
-    with patch('sys.stdin', StringIO(input_data)):
-        with patch('sys.stdout', new=StringIO()) as fake_output:
-            exec(open('solution.py').read())
-            return fake_output.getvalue()
+@pytest.fixture
+def run_solution(monkeypatch):
+    def _run_solution(input_data):
+        fake_input = StringIO(input_data)
+        fake_output = StringIO()
+        monkeypatch.setattr('sys.stdin', fake_input)
+        monkeypatch.setattr('sys.stdout', fake_output)
+        exec(open('solution.py').read())
+        return fake_output.getvalue()
+    return _run_solution
 
-def test_case1():
-    """基本測試"""
-    input_data = "-2 1 -3 4 -1 2 1 -5 4"
-    expected_output = "子路徑為 4 -1 2 1 且最大能量和為 6\n"
-    assert run_solution(input_data) == expected_output
-
-def test_case2():
-    """全負數"""
-    input_data = "-1 -2 -3 -4"
-    expected_output = "子路徑為 -1 且最大能量和為 -1\n"
-    assert run_solution(input_data) == expected_output
-
-def test_case3():
-    """全正數"""
-    input_data = "1 2 3 4"
-    expected_output = "子路徑為 1 2 3 4 且最大能量和為 10\n"
+@pytest.mark.parametrize("input_data,expected_output,test_description", [
+    (
+        "-2 1 -3 4 -1 2 1 -5 4",
+        "子路徑為 4 -1 2 1 且最大能量和為 6\n",
+        "基本測試"
+    ),
+    (
+        "-1 -2 -3 -4",
+        "子路徑為 -1 且最大能量和為 -1\n",
+        "全負數"
+    ),
+    (
+        "1 2 3 4",
+        "子路徑為 1 2 3 4 且最大能量和為 10\n",
+        "全正數"
+    )
+])
+def test_solution(run_solution, input_data, expected_output, test_description):
     assert run_solution(input_data) == expected_output 

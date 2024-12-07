@@ -1,27 +1,33 @@
 import pytest
 from io import StringIO
-from unittest.mock import patch
 
-def run_solution(input_data):
-    with patch('sys.stdin', StringIO(input_data)):
-        with patch('sys.stdout', new=StringIO()) as fake_output:
-            exec(open('solution.py').read())
-            return fake_output.getvalue()
+@pytest.fixture
+def run_solution(monkeypatch):
+    def _run_solution(input_data):
+        fake_input = StringIO(input_data)
+        fake_output = StringIO()
+        monkeypatch.setattr('sys.stdin', fake_input)
+        monkeypatch.setattr('sys.stdout', fake_output)
+        exec(open('solution.py').read())
+        return fake_output.getvalue()
+    return _run_solution
 
-def test_case1():
-    """基本測試"""
-    input_data = "4\n1,1\n2,2\n3,3\n4,4"
-    expected_output = "4\n"
-    assert run_solution(input_data) == expected_output
-
-def test_case2():
-    """垂直線"""
-    input_data = "3\n1,1\n1,2\n1,3"
-    expected_output = "3\n"
-    assert run_solution(input_data) == expected_output
-
-def test_case3():
-    """重複點"""
-    input_data = "3\n1,1\n1,1\n2,2"
-    expected_output = "2\n"
+@pytest.mark.parametrize("input_data,expected_output,test_description", [
+    (
+        "4\n1,1\n2,2\n3,3\n4,4",
+        "4\n",
+        "基本測試"
+    ),
+    (
+        "3\n1,1\n1,2\n1,3",
+        "3\n",
+        "垂直線"
+    ),
+    (
+        "3\n1,1\n1,1\n2,2",
+        "2\n",
+        "重複點"
+    )
+])
+def test_solution(run_solution, input_data, expected_output, test_description):
     assert run_solution(input_data) == expected_output 

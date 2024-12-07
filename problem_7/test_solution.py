@@ -1,27 +1,33 @@
 import pytest
 from io import StringIO
-from unittest.mock import patch
 
-def run_solution(input_data):
-    with patch('sys.stdin', StringIO(input_data)):
-        with patch('sys.stdout', new=StringIO()) as fake_output:
-            exec(open('solution.py').read())
-            return fake_output.getvalue()
+@pytest.fixture
+def run_solution(monkeypatch):
+    def _run_solution(input_data):
+        fake_input = StringIO(input_data)
+        fake_output = StringIO()
+        monkeypatch.setattr('sys.stdin', fake_input)
+        monkeypatch.setattr('sys.stdout', fake_output)
+        exec(open('solution.py').read())
+        return fake_output.getvalue()
+    return _run_solution
 
-def test_case1():
-    """基本測試"""
-    input_data = "2\nOOXOO\nOXOOO"
-    expected_output = "7\n4\n"
-    assert run_solution(input_data) == expected_output
-
-def test_case2():
-    """全對測試"""
-    input_data = "1\nOOOO"
-    expected_output = "10\n"
-    assert run_solution(input_data) == expected_output
-
-def test_case3():
-    """全錯測試"""
-    input_data = "1\nXXXX"
-    expected_output = "0\n"
+@pytest.mark.parametrize("input_data,expected_output,test_description", [
+    (
+        "2\nOOXOO\nOXOOO",
+        "7\n4\n",
+        "基本測試"
+    ),
+    (
+        "1\nOOOO",
+        "10\n",
+        "全對測試"
+    ),
+    (
+        "1\nXXXX",
+        "0\n",
+        "全錯測試"
+    )
+])
+def test_solution(run_solution, input_data, expected_output, test_description):
     assert run_solution(input_data) == expected_output 
