@@ -19,19 +19,14 @@ def run_solution(monkeypatch):
 
 @pytest.mark.parametrize("input_data,expected_output,test_description", [
     (
-        "6\n5 1 6 10 3 2",
-        "19\n",
+        "3\n2 3 2",
+        "4\n",
         "基本測試"
     ),
     (
-        "1\n5",
-        "5\n",
-        "只有一個蛋"
-    ),
-    (
-        "4\n1 2 3 4",
-        "6\n",
-        "連續遞增"
+        "4\n5 1 1 5",
+        "10\n",
+        "基本測試"
     )
 ])
 def test_egg_drop(run_solution, input_data, expected_output, test_description):

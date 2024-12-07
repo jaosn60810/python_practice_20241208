@@ -19,19 +19,14 @@ def run_solution(monkeypatch):
 
 @pytest.mark.parametrize("input_data,expected_output,test_description", [
     (
-        "1 2 3 4 5 10 10 0 20 0 20",
-        "10\n10\n1\n",
-        "基本測試"
+        "100 10 5 3 2 20 30 20 60 25 50",
+        "22\n31\n461\n",
+        "基本參數測試"
     ),
     (
-        "1 2 3 4 5 10 10 0 0 0 0",
-        "0\n0\n1\n",
-        "最小範圍測試"
-    ),
-    (
-        "1 0 0 0 0 5 5 0 10 0 10",
-        "5\n5\n1\n",
-        "相同最大值，選擇較小的t"
+        "223 31 17 3 5 37 19 20 60 10 52",
+        "42\n21\n1787\n",
+        "大數參數測試"
     )
 ])
 def test_max_value_period(run_solution, input_data, expected_output, test_description):

@@ -19,19 +19,9 @@ def run_solution(monkeypatch):
 
 @pytest.mark.parametrize("input_data,expected_output,test_description", [
     (
-        "2\nOOXOO\nOXOOO",
-        "7\n4\n",
-        "基本測試"
-    ),
-    (
-        "1\nOOOO",
-        "10\n",
-        "全對測試"
-    ),
-    (
-        "1\nXXXX",
-        "0\n",
-        "全錯測試"
+        "5\nOOXXOXXOOO\nOOXXOOXXOO\nOXOXOXOXOXOX\nOOOOOOOOOO\nOOOOXOOOOX",
+        "10\n9\n6\n55\n20\n",
+        "多種情況測試"
     )
 ])
 def test_score_calc(run_solution, input_data, expected_output, test_description):

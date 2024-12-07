@@ -19,19 +19,14 @@ def run_solution(monkeypatch):
 
 @pytest.mark.parametrize("input_data,expected_output,test_description", [
     (
-        "4\n1,1\n2,2\n3,3\n4,4",
+        "6\n1,1\n3,2\n5,3\n4,1\n2,3\n1,4",
         "4\n",
-        "基本測試"
+        "不同斜率測試"
     ),
     (
-        "3\n1,1\n1,2\n1,3",
-        "3\n",
-        "垂直線"
-    ),
-    (
-        "3\n1,1\n1,1\n2,2",
-        "2\n",
-        "重複點"
+        "5\n1,1\n2,2\n3,3\n4,4\n2,2",
+        "4\n",
+        "重複點測試"
     )
 ])
 def test_collinear_points(run_solution, input_data, expected_output, test_description):

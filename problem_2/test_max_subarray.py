@@ -19,19 +19,14 @@ def run_solution(monkeypatch):
 
 @pytest.mark.parametrize("input_data,expected_output,test_description", [
     (
-        "-2 1 -3 4 -1 2 1 -5 4",
-        "子路徑為 4 -1 2 1 且最大能量和為 6\n",
-        "基本測試"
+        "1 2 3 4 5",
+        "子路徑為 1 2 3 4 5 且最大能量和為 15\n",
+        "全正數路徑"
     ),
     (
-        "-1 -2 -3 -4",
+        "-1 -2 -3 -4 -5",
         "子路徑為 -1 且最大能量和為 -1\n",
-        "全負數"
-    ),
-    (
-        "1 2 3 4",
-        "子路徑為 1 2 3 4 且最大能量和為 10\n",
-        "全正數"
+        "全負數路徑"
     )
 ])
 def test_max_subarray(run_solution, input_data, expected_output, test_description):

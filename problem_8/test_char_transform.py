@@ -19,19 +19,14 @@ def run_solution(monkeypatch):
 
 @pytest.mark.parametrize("input_data,expected_output,test_description", [
     (
-        "2\na",
-        "A\n",
-        "偶數且不被3整除"
+        "14\nF",
+        "f\n",
+        "大小寫轉換測試"
     ),
     (
-        "6\na",
-        "a\n",
-        "偶數且被3整除"
-    ),
-    (
-        "3\na",
-        "97\n",
-        "奇數且被3整除"
+        "15\n0",
+        "48\n",
+        "數字轉換測試"
     )
 ])
 def test_char_transform(run_solution, input_data, expected_output, test_description):

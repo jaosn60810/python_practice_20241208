@@ -19,19 +19,14 @@ def run_solution(monkeypatch):
 
 @pytest.mark.parametrize("input_data,expected_output,test_description", [
     (
-        "顏成\n3\n林雅\n顏成\n小美",
-        "2\n",
-        "基本測試：名字出現一次"
-    ),
-    (
-        "顏成\n5\n顏成\n林雅\n顏成\n小美\n顏成",
-        "1\n3\n5\n",
+        "Bob\n7\nAlice\nCantor\nDennis\nBob\nEric\nBob\nFrank",
+        "4\n6\n",
         "名字出現多次"
     ),
     (
-        "顏成\n3\n林雅\n小美\n大明",
+        "Mary\n4\nMARY\nmary\nMary0\n0Mary",
         "None\n",
-        "名字不存在"
+        "名字不在名單中"
     )
 ])
 def test_find_name(run_solution, input_data, expected_output, test_description):

@@ -19,19 +19,14 @@ def run_solution(monkeypatch):
 
 @pytest.mark.parametrize("input_data,expected_output,test_description", [
     (
-        "1 2",
-        "16\n",
-        "基本測試"
+        "1 1",
+        "10\n",
+        "相同數字測試"
     ),
     (
-        "0 0",
-        "0\n",
-        "零值測試"
-    ),
-    (
-        "-1 -2",
-        "-16\n",
-        "負數測試"
+        "10 100",
+        "640\n",
+        "大數測試"
     )
 ])
 def test_number_calc(run_solution, input_data, expected_output, test_description):

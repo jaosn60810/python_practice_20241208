@@ -19,19 +19,14 @@ def run_solution(monkeypatch):
 
 @pytest.mark.parametrize("input_data,expected_output,test_description", [
     (
-        "3\nY P\nP O\nO Y",
-        "1\n1\n1\n",
-        "基本測試"
+        "3\nY P\nY O\nY Y",
+        "1\n2\n0\n",
+        "三種結果測試"
     ),
     (
-        "3\nY Y\nP P\nO O",
-        "0\n0\n0\n",
-        "平手測試"
-    ),
-    (
-        "3\nP Y\nO P\nY O",
-        "2\n2\n2\n",
-        "玩家2獲勝"
+        "5\nP P\nP Y\nY O\nP O\nO Y",
+        "0\n2\n2\n1\n1\n",
+        "多場次測試"
     )
 ])
 def test_rock_paper_scissors(run_solution, input_data, expected_output, test_description):
