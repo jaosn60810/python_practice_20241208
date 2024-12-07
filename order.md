@@ -7,4 +7,4 @@
 第4題：直線上最多的點數（偏難）
 第8題：神秘符文之謎（困難）
 第9題：尋找最大農作物收穫（非常困難）
-python -m unittest test_solution.py
+pytest problem_1/test_solution.py 

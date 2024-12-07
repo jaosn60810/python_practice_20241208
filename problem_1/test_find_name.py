@@ -10,7 +10,6 @@ def run_solution(monkeypatch):
         monkeypatch.setattr('sys.stdin', fake_input)
         monkeypatch.setattr('sys.stdout', fake_output)
         
-        # Get the current test file's directory
         current_dir = os.path.dirname(os.path.abspath(__file__))
         solution_path = os.path.join(current_dir, 'solution.py')
         
@@ -20,20 +19,20 @@ def run_solution(monkeypatch):
 
 @pytest.mark.parametrize("input_data,expected_output,test_description", [
     (
-        "2\nOOXOO\nOXOOO",
-        "7\n4\n",
-        "基本測試"
+        "顏成\n3\n林雅\n顏成\n小美",
+        "2\n",
+        "基本測試：名字出現一次"
     ),
     (
-        "1\nOOOO",
-        "10\n",
-        "全對測試"
+        "顏成\n5\n顏成\n林雅\n顏成\n小美\n顏成",
+        "1\n3\n5\n",
+        "名字出現多次"
     ),
     (
-        "1\nXXXX",
-        "0\n",
-        "全錯測試"
+        "顏成\n3\n林雅\n小美\n大明",
+        "None\n",
+        "名字不存在"
     )
 ])
-def test_solution(run_solution, input_data, expected_output, test_description):
-    assert run_solution(input_data) == expected_output 
+def test_find_name(run_solution, input_data, expected_output, test_description):
+    assert run_solution(input_data) == expected_output

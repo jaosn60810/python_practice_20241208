@@ -10,7 +10,6 @@ def run_solution(monkeypatch):
         monkeypatch.setattr('sys.stdin', fake_input)
         monkeypatch.setattr('sys.stdout', fake_output)
         
-        # Get the current test file's directory
         current_dir = os.path.dirname(os.path.abspath(__file__))
         solution_path = os.path.join(current_dir, 'solution.py')
         
@@ -20,20 +19,20 @@ def run_solution(monkeypatch):
 
 @pytest.mark.parametrize("input_data,expected_output,test_description", [
     (
-        "顏成\n3\n林雅\n顏成\n小美",
-        "2\n",
-        "基本測試：名字出現一次"
+        "1 2 3 4 5 10 10 0 20 0 20",
+        "10\n10\n1\n",
+        "基本測試"
     ),
     (
-        "顏成\n5\n顏成\n林雅\n顏成\n小美\n顏成",
-        "1\n3\n5\n",
-        "名字出現多次"
+        "1 2 3 4 5 10 10 0 0 0 0",
+        "0\n0\n1\n",
+        "最小範圍測試"
     ),
     (
-        "顏成\n3\n林雅\n小美\n大明",
-        "None\n",
-        "名字不存在"
+        "1 0 0 0 0 5 5 0 10 0 10",
+        "5\n5\n1\n",
+        "相同最大值，選擇較小的t"
     )
 ])
-def test_solution(run_solution, input_data, expected_output, test_description):
-    assert run_solution(input_data) == expected_output 
+def test_max_value_period(run_solution, input_data, expected_output, test_description):
+    assert run_solution(input_data) == expected_output

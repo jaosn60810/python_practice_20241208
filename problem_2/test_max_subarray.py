@@ -10,7 +10,6 @@ def run_solution(monkeypatch):
         monkeypatch.setattr('sys.stdin', fake_input)
         monkeypatch.setattr('sys.stdout', fake_output)
         
-        # Get the current test file's directory
         current_dir = os.path.dirname(os.path.abspath(__file__))
         solution_path = os.path.join(current_dir, 'solution.py')
         
@@ -20,20 +19,22 @@ def run_solution(monkeypatch):
 
 @pytest.mark.parametrize("input_data,expected_output,test_description", [
     (
-        "6\n5 1 6 10 3 2",
-        "19\n",
+        "-2 1 -3 4 -1 2 1 -5 4",
+        "子路徑為 4 -1 2 1 且最大能量和為 6\n",
         "基本測試"
     ),
     (
-        "1\n5",
-        "5\n",
-        "只有一個蛋"
+        "-1 -2 -3 -4",
+        "子路徑為 -1 且最大能量和為 -1\n",
+        "全負數"
     ),
     (
-        "4\n1 2 3 4",
-        "6\n",
-        "連續遞增"
+        "1 2 3 4",
+        "子路徑為 1 2 3 4 且最大能量和為 10\n",
+        "全正數"
     )
 ])
-def test_solution(run_solution, input_data, expected_output, test_description):
-    assert run_solution(input_data) == expected_output 
+def test_max_subarray(run_solution, input_data, expected_output, test_description):
+    assert run_solution(input_data) == expected_output
+
+
