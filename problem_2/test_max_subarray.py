@@ -27,6 +27,11 @@ def run_solution(monkeypatch):
         "-1 -2 -3 -4 -5",
         "子路徑為 -1 且最大能量和為 -1\n",
         "全負數路徑"
+    ),
+    (
+        "4 -1 2",
+        "子路徑為 4 -1 2 且最大能量和為 5\n",
+        "有正有負"
     )
 ])
 def test_max_subarray(run_solution, input_data, expected_output, test_description):
