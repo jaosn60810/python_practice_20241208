@@ -1,19 +1,20 @@
 # 第3題: 雞蛋大盜
 n = int(input())
 eggs = list(map(int, input().split()))
-# dp = [0] * (n + 1)
-# dp[1] = eggs[0]
+# dp = [0] * n
+# dp[0] = eggs[0]  # 偷一個
+# dp[1] = max(dp[0], eggs[1])  # 偷兩個
 
-# for i in range(2, n + 1):
-#     dp[i] = max(dp[i - 1], dp[i - 2] + eggs[i - 1])
+# for i in range(2, n):
+#     dp[i] = max(dp[i - 1], dp[i - 2] + eggs[i])
 
-# print(dp[n]) 
+# print(dp[n - 1])
 
 
-rob1, rob2 = 0, 0
+rob1, rob2 = eggs[0], max(eggs[0], eggs[1])
 
 # [rob1, rob2, n, n+1, ...]
-for n in eggs:
+for n in eggs[2:]:
     tmp = max(rob1 + n, rob2)
     rob1 = rob2
     rob2 = tmp
